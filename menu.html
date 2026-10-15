@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Queen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+        overflow-y: scroll; 
+    }
+
+    body {
+      background-color: #000000;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      font-weight: bold;
+      color: #96613d;
+      font-size: 24px;
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 40%;
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 75vh;
+      max-width: 1200px;
+      margin: 50px auto;
+      background: url('https://i.pinimg.com/736x/7c/b9/19/7cb9195a03cb558d4cdc6d2909898412.jpg') center/cover no-repeat;
+      border: 3px solid #96613d;
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      padding: 40px;
+      overflow: hidden;
+    }
+
+    .hero-text {
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 40px;
+      border-radius: 20px;
+    }
+
+    .hero-text h1 {
+      font-size: 38px;
+      line-height: 1.4;
+      color: #fff;
+    }
+
+    .hero-text .highlight {
+      font-family: 'Pacifico', cursive;
+      font-size: 28px;
+      color: white;
+      display: block;
+    }
+
+    .hero-text .circle-word {
+      display: inline-block;
+      border: 2px solid white;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-family: 'Pacifico', cursive;
+      font-size: 26px;
+    }
+
+    .hero-text p {
+      margin: 20px 0;
+      color: white;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .hero-text button {
+      background: transparent;
+      border: 2px solid #96613d;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .slider-container {
+      margin-top: 100px;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('https://images.unsplash.com/photo-1612899326681-66508905b4ce?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c2F1ZGl8ZW58MHx8MHx8fDA%3D') center/cover no-repeat;
+    }
+
+    .slider-image {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+      min-height: 650px; 
+    }
+
+    .slider-image.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slider-img {
+      width: 70px;
+      height: 400px;
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      transition: 0.7s ease;
+    }
+
+    .slider-img:nth-child(2), .slider-img:nth-child(6) {
+      height: 500px;
+    }
+
+    .slider-img:nth-child(3), .slider-img:nth-child(4), .slider-img:nth-child(5) {
+      height: 600px;
+    }
+
+    .slider-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+      filter: brightness(70%);
+    }
+
+    .slider-img h1 {
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      color: #fff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) rotate(270deg);
+      transition: 0.7s ease;
+    }
+
+    .details {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .details h2, .details p {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .slider-img.active {
+      width: 700px !important;
+      height: 650px !important;
+    }
+
+    .slider-img.active h1 {
+      display: none;
+    }
+
+    .slider-img.active .details {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-text {
+        width: 100%;
+        padding: 20px;
+      }
+
+      .hero-text h1 {
+        font-size: 28px;
+      }
+
+      .hero-text .highlight {
+        font-size: 20px;
+      }
+
+      .top-bar {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div>The Coffee</div>
+    <div class="logo">
+      <a href="front.html"><img src="img/logo.jpeg" alt="Logo" /> </a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-text">
+      <span class="highlight">Sip, Relax, Repeat</span>
+      <h1>Curated Coffee<br>For Soulful <span class="circle-word">Days</span></h1>
+      <p>Unwind with rich aromas, cozy spaces, and the taste of calm in every cup.
+</p>
+      <a href="#slider-section"><button>View NOW</button></a> 
+    </div>
+  </div>
+<!-- 1سلايدر  -->
+  <section class="slider-container" id="slider-section">
+    <div class="slider-image">
+      <div class="slider-img"><img src="https://i.pinimg.com/1200x/19/84/97/1984974a7fb8b50dd71608f9d0e95a34.jpg"><h1>Chocolate Cake</h1><div class="details"><h2>🍫 Chocolate Cake</h2><p>Rich and moist layers topped with Belgian ganache.</p></div></div>
+      <div class="slider-img"><img src="https://i.pinimg.com/1200x/b2/1d/b3/b21db3b7726c699d2c92b285c1b6efe2.jpg"><h1>Cappuccino</h1><div class="details"><h2>☕️ Cappuccino</h2><p>Espresso with thick milk foam — bold & creamy.</p></div></div>
+      <div class="slider-img"><img src="https://i.pinimg.com/736x/90/44/ed/9044ed66896db993d8b7e2ca30861c7c.jpg"><h1>Matcha</h1><div class="details"><h2>🍵 Matcha</h2><p>Japanese green tea made with matcha powder.</p></div></div>
+      <div class="slider-img"><img src="https://i.pinimg.com/736x/9f/e9/a0/9fe9a0711738c4a5d0e6daebde78ca89.jpg"><h1>Coconut Coffee</h1><div class="details"><h2>🥥 Coconut Coffee</h2><p>Infused with coconut milk — smooth & tropical.</p></div></div>
+      <div class="slider-img"><img src="https://i.pinimg.com/736x/9f/e9/a0/9fe9a0711738c4a5d0e6daebde78ca89.jpg"><h1>Coconut Coffee</h1><div class="details"><h2>🥥 Coconut Coffee</h2><p>Infused with coconut milk — smooth & tropical.</p></div></div>
+      <div class="slider-img"><img src="https://i.pinimg.com/736x/c3/5f/67/c35f67c51fb527cb387d710b0500c723.jpg"><h1>Hot Chocolate</h1><div class="details"><h2>☕️ Hot Chocolate</h2><p>Dark chocolate & milk — warm and indulgent.</p></div></div>
+      <div class="slider-img"><img src="https://i.pinimg.com/1200x/3c/4d/89/3c4d8924b2576d22b6e8641f9109d969.jpg"><h1>Al-Mueaqly</h1><div class="details"><h2>🎂 Al-Mueaqly Cake</h2><p>Saffron & cardamom flavored delight.</p></div></div>
+      <div class="slider-img"><img src="https://i.pinimg.com/1200x/f7/1f/6f/f71f6f0350367ff0542f28d34ce7bd01.jpg"><h1>Berry Cake</h1><div class="details"><h2>🍇 Berry Cake</h2><p>Vanilla sponge with berries & cream.</p></div></div>
+    </div>
+  </section>
+    <div>
+        <img src="img/ableICED.jpg" />
+    </div>
+    <section id="mini-menu" style="background-color: black; padding: 80px 20px; overflow-x: hidden;">
+        <h2 style="color: #fff; text-align: center; font-size: 36px; margin-bottom: 60px; font-family: 'Pacifico', cursive;">
+          Mini Menu
+        </h2>
+        <div class="menu-grid">
+
+          <div class="menu-card">
+            <img src="https://i.pinimg.com/736x/62/bb/84/62bb8405e352a97bf7ae854fa59df6c0.jpg" alt="Latte" />
+            <h3>Iced Americano</h3>
+            <p>Water with bold espresso.</p>
+            <a href="#">Learn More →</a>
+          </div>
+
+          <div class="menu-card">
+            <img src="https://i.pinimg.com/736x/62/bb/84/62bb8405e352a97bf7ae854fa59df6c0.jpg" alt="Latte" />
+            <h3>Iced Coffee Day</h3>
+            <p>Filterd Coffee</p>
+            <a href="#">Learn More →</a>
+          </div>
+
+          <div class="menu-card">
+            <img src="https://i.pinimg.com/1200x/6a/aa/3a/6aaa3aaab1b40db6a04b59545d7bb4ca.jpg" alt="Latte" />
+            <h3>Iced Latte</h3>
+            <p>Velvety milk with bold espresso.</p>
+            <a href="#">Learn More →</a>
+          </div>
+
+          <div class="menu-card">
+            <img src="https://i.pinimg.com/1200x/d5/79/7f/d5797f0d5823b3ffc7396aa714c28e83.jpg" alt="Latte" />
+            <h3>Iced V60</h3>
+            <p>Filterd Coffee</p>
+            <a href="#">Learn More →</a>
+          </div>
+
+
+          <div class="menu-card">
+            <img src="https://i.pinimg.com/1200x/6a/aa/3a/6aaa3aaab1b40db6a04b59545d7bb4ca.jpg" alt="Latte" />
+            <h3>iced white mocha </h3>
+            <p>Velvety milk with bold espresso and bomb of sirup.</p>
+            <a href="#">Learn More →</a>
+          </div>
+
+          <div class="menu-card">
+            <img src="https://i.pinimg.com/1200x/a6/74/bc/a674bc57c44c4d9836e5a8e369550392.jpg" alt="Latte" />
+            <h3>Iced tea</h3>
+            <p>Tea with peach sirup.</p>
+            <a href="#">Learn More →</a>
+          </div>
+
+        <div class="menu-card">
+          <img src="https://i.pinimg.com/736x/62/3e/eb/623eeb284d950d54586d6845b3fcd678.jpg" alt="Latte" />
+          <h3>Iced macha</h3>
+          <p>Velvety milk with macha.</p>
+          <a href="#">Learn More →</a>
+        </div>
+</div>
+      
+        <style>
+          * {
+            box-sizing: border-box;
+          }
+      
+          .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: auto;
+            width: 100%;
+            padding: 0 15px;
+          }
+      
+          .menu-card {
+            background: #1a1a1a;
+            border: 2px solid #96613d;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+          }
+      
+          .menu-card:hover {
+            transform: translateY(-10px);
+          }
+      
+          .menu-card img {
+            height: 160px;
+            object-fit: contain;
+            margin-bottom: 20px;
+          }
+      
+          .menu-card h3 {
+            color: #fff;
+            font-size: 20px;
+            margin-bottom: 10px;
+          }
+      
+          .menu-card p {
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 15px;
+          }
+      
+          .menu-card a {
+            color: #f5c381;
+            text-decoration: none;
+            font-weight: bold;
+          }
+        </style>
+      </section>
+      <div>
+        <img src="img/hotLABLE.jpg" style="display: block; margin: 0 auto; width: 100%; object-fit: cover;" />
+      </div>
+
+      <section id="mini-menu" style="background-color: black; padding: 80px 20px; overflow-x: hidden;">
+        <h2 style="color: #fff; text-align: center; font-size: 36px; margin-bottom: 60px; font-family: 'Pacifico', cursive;">
+          Mini Menu
+        </h2>
+        <div class="menu-grid">
+
+          <div class="menu-card">
+            <img src="https://i.pinimg.com/736x/9c/c4/3b/9cc43bbdbefad749132f77bbdeae8230.jpg" alt="Latte" />
+            <h3>Americano</h3>
+            <p>Water with bold espresso.</p>
+            <a href="#">Learn More →</a>
+          </div>
+
+          <div class="menu-card">
+            <img src="https://i.pinimg.com/736x/9c/c4/3b/9cc43bbdbefad749132f77bbdeae8230.jpg" alt="Latte" />
+            <h3>Coffee Day</h3>
+            <p>Filterd coffee.</p>
+            <a href="#">Learn More →</a>
+          </div>
+
+          <div class="menu-card">
+            <img src="https://i.pinimg.com/1200x/e5/9a/cc/e59acc7127e9add0bd942612a5a3e1da.jpg" alt="Latte" />
+            <h3>Latte Art</h3>
+            <p>Velvety milk with bold espresso.</p>
+            <a href="#">Learn More →</a>
+          </div>
+
+          <div class="menu-card">
+            <img src="https://i.pinimg.com/736x/6e/d3/ff/6ed3fff2c3f6baf8591b73f99d620671.jpg" alt="Latte" />
+            <h3>Spanish Latte Art</h3>
+            <p>Velvety milk with bold espresso and bomb of sirup.</p>
+            <a href="#">Learn More →</a>
+          </div>
+</div>
+      
+        <style>
+          * {
+            box-sizing: border-box;
+          }
+      
+          .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: auto;
+            width: 100%;
+            padding: 0 15px;
+          }
+      
+          .menu-card {
+            background: #1a1a1a;
+            border: 2px solid #96613d;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+          }
+      
+          .menu-card:hover {
+            transform: translateY(-10px);
+          }
+      
+          .menu-card img {
+            height: 160px;
+            object-fit: contain;
+            margin-bottom: 20px;
+          }
+      
+          .menu-card h3 {
+            color: #fff;
+            font-size: 20px;
+            margin-bottom: 10px;
+          }
+      
+          .menu-card p {
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 15px;
+          }
+      
+          .menu-card a {
+            color: #f5c381;
+            text-decoration: none;
+            font-weight: bold;
+          }
+        </style>
+      </section>
+
+  
+  
+  <script>
+    $(document).ready(function () {
+      
+      $(".slider-img").on("click", function () {
+        $(".slider-img").removeClass("active");
+        $(".details").css("opacity", "0");
+        const $this = $(this);
+        $this.addClass("active");
+        $this.one("transitionend webkitTransitionEnd oTransitionEnd", function () {
+          $this.find(".details").css("opacity", "1");
+        });
+      });
+
+      
+      $(window).on('scroll', function () {
+        var sectionTop = $('#slider-section').offset().top;
+        var scrollTop = $(window).scrollTop();
+        var windowHeight = $(window).height();
+
+        if (scrollTop + windowHeight > sectionTop + 100) {
+          $('.slider-image').addClass('visible');
+        }
+      });
+    });
+  </script>
+  
+</body>
+</html>

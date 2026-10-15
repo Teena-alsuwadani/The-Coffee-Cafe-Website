@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Coffee</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: url(background.jpg) no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 50px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .left-menu,
+    .right-menu {
+      display: flex;
+      gap: 30px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .left-menu a,
+    .right-menu a {
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .left-menu a:hover,
+    .right-menu a:hover {
+      color: #b87333;
+    }
+
+    .logo1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+
+    .content {
+      text-align: center;
+      padding: 80px 20px 20px;
+      margin-top: 30px;
+    }
+
+    .content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 46px;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    .content p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 16px;
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    .view-button {
+      position: absolute;
+      right: 50px;
+      top: 65%;
+      transform: translateY(-50%);
+      width: 120px;
+      height: 120px;
+      border: 1px solid white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      text-decoration: none;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .view-button:hover {
+      background-color: white;
+      color: black;
+    }
+    .logo img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 40%;
+    }
+
+  </style>
+</head>
+<body>
+
+  
+  <header>
+    <div class="left-menu">
+      <a href="menu.html">MENU</a>
+      <a href="contactus.html">CONTACT US</a>
+    </div>
+  
+    <div class="logo1">The Coffee</div> <!-- يبقى هنا لكن سيتموضع بالمنتصف عبر CSS -->
+  
+    <div class="logo">
+      <img src="img/logo.jpeg" alt="Logo" />
+    </div>
+  </header>
+  
+
+  <div class="content">
+    <h2>Modern</h2>
+    <h1>The coffee</h1>
+    <p>
+      "The Coffee" was founded with one goal in mind: </br>
+       Nothing beats a cup of freshly roasted specialty coffee. </br>
+       #The_Coffee
+    </p>
+  </div>
+
+  <a href="menu.html" class="view-button">View Menu →</a>
+
+</body>
+</html>
